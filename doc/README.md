@@ -1,5 +1,13 @@
 # Lab1 Phase 1：SVG CLI 编辑器
 
+## 作业访问地址
+
+- Git 仓库：[Luwarmth/svg-editor-lab1](https://github.com/Luwarmth/svg-editor-lab1)
+- 已验收代码版本：[final 标签](https://github.com/Luwarmth/svg-editor-lab1/tree/final)
+- 本报告在线地址：[doc/README.md](https://github.com/Luwarmth/svg-editor-lab1/blob/main/doc/README.md)
+
+仓库为公开仓库，老师可直接查看代码、提交历史及 final 标签，无需接受协作者邀请。
+
 ## 架构方案
 
 ### 工作方案与阶段验收
@@ -113,7 +121,9 @@ io --> model
 
 ### 开发提交
 
-阶段提交依次为架构方案、图形模型、SVG 读写、CLI 与历史管理、XML 边界修复、验收脚本和文档。可用 `git log --oneline --reverse` 查看实际记录。远程仓库为私有，老师查看时需要仓库访问权限。
+阶段提交依次为架构方案、图形模型、SVG 读写、CLI 与历史管理、XML 边界修复、验收脚本和文档。可用 `git log --oneline --reverse` 查看实际记录。
+
+2026-10-22：用户说明作业需提交含 Git 仓库地址的 README，并要求将仓库公开。补充两份 README 的仓库、final 版本和报告链接；仓库由私有改为公开，便于老师直接访问。final 保留已验收代码版本，后续访问说明另作独立文档提交。
 
 ## 一致性自查
 
@@ -138,7 +148,7 @@ io --> model
 | 人可见输出 | npm run demo / demo:session 成功；流程图用 resvg 输出 PNG 并实际查看 |
 | 架构 | 静态 import、一类一文件、无应用层自由函数/switch/显式 any；结合人工抽查 |
 
-![流程图输出的本地渲染预览](flowchart-preview.png)
+![流程图输出的本地渲染预览](https://raw.githubusercontent.com/Luwarmth/svg-editor-lab1/main/doc/flowchart-preview.png)
 
 ## 运行、演示与提交检查
 
@@ -152,4 +162,4 @@ npm run preview
 
 主目录 README 提供启动说明。examples/flowchart.commands 可回放实验流程图，examples/session.commands 可回放典型会话；后者两条 error 是预期结果。
 
-提交代码需保留分步历史，并将最终验收提交标记为 final 后与 main 一起推送。原始任务未给出截止时间，用户仍应核对课程平台的具体截止时间与老师访问仓库的方式。
+已保留分步历史，并将验收代码标记为 final 与 main 一起推送；仓库已公开。原始任务未给出截止时间，用户仍应核对课程平台的具体截止时间。提交本 README 时，老师可通过文首链接访问仓库和验收版本。

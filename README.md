@@ -2,6 +2,14 @@
 
 使用 TypeScript、Command 和 Composite 实现的面向对象 SVG 命令行编辑器。
 
+## 作业访问地址
+
+- Git 仓库：[Luwarmth/svg-editor-lab1](https://github.com/Luwarmth/svg-editor-lab1)
+- 已验收代码版本：[final 标签](https://github.com/Luwarmth/svg-editor-lab1/tree/final)
+- 完整实验报告：[架构方案、过程记录、一致性自查与质量保证](https://github.com/Luwarmth/svg-editor-lab1/blob/main/doc/README.md)
+
+仓库为公开仓库，老师可直接通过上述链接查看代码、提交历史和实验报告。
+
 ## 安装与运行
 
 需要 Node.js 22 或以上版本，以及 npm。首次下载项目后：
