@@ -8,12 +8,17 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "cli": "npm run build --silent && node dist/src/main.js",
     "test": "npm run build --silent && node --test dist/tests/*.test.js",
-    "check:architecture": "node scripts/check-architecture.cjs"
+    "check:architecture": "node scripts/check-architecture.cjs",
+    "verify": "npm run typecheck && npm run check:architecture && npm test",
+    "demo": "npm run build --silent && node scripts/replay.cjs examples/flowchart.commands",
+    "demo:session": "npm run build --silent && node scripts/replay.cjs examples/session.commands",
+    "preview": "node scripts/render-preview.cjs"
   },
   "dependencies": {
     "fast-xml-parser": "^5.3.0"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^22.0.0",
     "typescript": "^5.9.0"
   }
