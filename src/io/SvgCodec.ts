@@ -37,7 +37,15 @@ export class SvgCodec {
 
   public decode(source: string): { document: SvgDocument; warnings: string[] } {
     Value.text(source);
-    if (/<!DOCTYPE|<!ENTITY/i.test(source)) throw new Error('SVG document types and entity declarations are not supported');
+    const markup = source.replace(/<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<\?[\s\S]*?\?>/g, '');
+    if (/<!DOCTYPE|<!ENTITY/i.test(markup)) throw new Error('SVG document types and entity declarations are not supported');
+    if (/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[\da-fA-F]+);)/.test(markup)) throw new Error('invalid XML entity reference');
+    for (const match of markup.matchAll(/&#(x[\da-fA-F]+|\d+);/g)) {
+      const raw = match[1]!;
+      const code = raw.startsWith('x') ? Number.parseInt(raw.slice(1), 16) : Number(raw);
+      if (!Number.isInteger(code) || code > 0x10ffff) throw new Error('invalid XML character reference');
+      Value.text(String.fromCodePoint(code));
+    }
     const valid = XMLValidator.validate(source);
     if (valid !== true) throw new Error(`invalid SVG XML: ${valid.err.msg}`);
     const parser = new XMLParser({

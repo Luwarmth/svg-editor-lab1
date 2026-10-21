@@ -48,6 +48,13 @@ test('nested translation and uniform scaling normalize in SVG transform order', 
   assert.equal(attrs.get('width'), '96'); assert.equal(attrs.get('height'), '48');
 });
 
+test('escaped entity-looking text is decoded once and CDATA stays literal', () => {
+  const codec = new SvgCodec();
+  const document = codec.decode('<svg><text id="t">&amp;#10; &amp;lt; &#x1F600;<![CDATA[<!DOCTYPE literal> &unknown;]]></text></svg>').document;
+  assert.equal(document.require('t').content, '&#10; &lt; 😀<!DOCTYPE literal> &unknown;');
+  assert.equal(codec.decode(codec.encode(document)).document.require('t').content, document.require('t').content);
+});
+
 test('unsupported or malformed SVG fails explicitly instead of dropping data', () => {
   const codec = new SvgCodec();
   const invalid = [
@@ -59,6 +66,8 @@ test('unsupported or malformed SVG fails explicitly instead of dropping data', (
     '<svg xmlns="wrong"/>', '<svg style="fill:red"/>', '<svg><rect id="r" unknown="x"/></svg>',
     '<svg><text id="t"><tspan>nope</tspan></text></svg>', '<svg>unexpected</svg>',
     '<!DOCTYPE svg [<!ENTITY x "abc">]><svg/>', '<svg><rect id="white space"/></svg>',
+    '<svg><text id="t">&unknown;</text></svg>', '<svg><text id="t">&#0;</text></svg>',
+    '<svg><text id="t">&#xD800;</text></svg>', '<svg><text id="t">&#x110000;</text></svg>',
   ];
   for (const source of invalid) assert.throws(() => codec.decode(source), /./, source);
 });
